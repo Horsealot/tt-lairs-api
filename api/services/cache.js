@@ -10,9 +10,9 @@ if (!port) throw new Error("Missing env variable REDIS_PORT");
 if (!password) throw new Error("Missing env variable REDIS_PASSWORD");
 
 const client = redis.createClient({
-    host: 'redis-16640.c15.us-east-1-4.ec2.cloud.redislabs.com',
-    port: '16640',
-    password: '62MB3ieM5lPHxBhia4o3qdZp30UK79Ay',
+    host,
+    port,
+    password
 });
 
 const {promisify} = require('util');
