@@ -18,11 +18,11 @@ const self = {
         let user = await UserModel.upsertUser(userId);
 
         let validUserLairs = [];
-        for(let i=0; i<lairIds.length; i++) {
+        for (let i = 0; i < lairIds.length; i++) {
             try {
                 const formattedLair = await GoogleMapsClient.getPlaceDetails(lairIds[i], {forceRefresh: true});
                 validUserLairs.push(formattedLair);
-            } catch(e) {
+            } catch (e) {
                 Logger.error(`index.ctrl.js\tLair {${lairIds[i]}} could not be added to {${userId}}, reason {${e.message}}`);
             }
         }
@@ -39,15 +39,15 @@ const self = {
     getUser: async (req, res) => {
         const userId = req.payload.id;
         let existingUser = await UserModel.findOne({_userId: userId});
-        if(!existingUser) {
+        if (!existingUser) {
             return res.send([]);
         }
         let validUserLairs = [];
-        for(let i=0; i<existingUser.lairs.length; i++) {
+        for (let i = 0; i < existingUser.lairs.length; i++) {
             try {
                 const formattedLair = await GoogleMapsClient.getPlaceDetails(existingUser.lairs[i]);
                 validUserLairs.push(formattedLair);
-            } catch(e) {
+            } catch (e) {
                 Logger.error(`index.ctrl.js\tLair {${lairIds[i]}} could not be retrieved for user {${userId}}, reason {${e.message}}`);
             }
         }

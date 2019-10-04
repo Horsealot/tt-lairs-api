@@ -65,7 +65,7 @@ describe('Index route', () => {
                     .set('Authorization', 'Bearer ' + jwt.sign({
                         id: user._userId,
                     }, process.env.INTERNAL_SECRET_TOKEN))
-                    .send(['fakePlaceId','secondFakePlaceId'])
+                    .send(['fakePlaceId', 'secondFakePlaceId'])
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.an('array');
@@ -88,7 +88,7 @@ describe('Index route', () => {
                 .set('Authorization', 'Bearer ' + jwt.sign({
                     id: '5d83431020e57635c3aeb52e',
                 }, process.env.INTERNAL_SECRET_TOKEN))
-                .send(['fakePlaceId','secondFakePlaceId'])
+                .send(['fakePlaceId', 'secondFakePlaceId'])
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.an('array');
@@ -161,7 +161,7 @@ describe('Index route', () => {
                 .set('Authorization', 'Bearer ' + jwt.sign({
                     id: '5d83431020e57635c3aeb52e',
                 }, process.env.INTERNAL_SECRET_TOKEN))
-                .send(['fakePlaceId','secondFakePlaceId'])
+                .send(['fakePlaceId', 'secondFakePlaceId'])
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.an('array');

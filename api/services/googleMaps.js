@@ -29,15 +29,16 @@ const self = {
             Logger.error(`googleMaps.js\tError while getting place {${placeid}} cache {${err.message}}`);
         }
 
-        if(cachedPlace) {
+        if (cachedPlace) {
             Logger.debug(`googleMaps.js\tCached version of {${placeid}} retrieved`);
             return cachedPlace;
         }
 
         let response;
         try {
-            response = await googleMapsClient.place({placeid, fields: [
-                    'public_id',
+            response = await googleMapsClient.place({
+                placeid, fields: [
+                    'place_id',
                     'name',
                     'type',
                     'photo',

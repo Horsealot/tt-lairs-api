@@ -10,7 +10,7 @@ const sinon = require('sinon');
 const expect = chai.expect;
 const googleMaps = require('@google/maps');
 
-const dummyClient = googleMaps.createClient({ key : 'dummy_key' });
+const dummyClient = googleMaps.createClient({key: 'dummy_key'});
 const clientStub = sinon.stub(googleMaps, 'createClient').returns(dummyClient);
 
 // Must be done after the stub

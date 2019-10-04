@@ -3,7 +3,12 @@
     "result": {
       "public_id": "Aaz1E",
       "formatted_address": "1 Rue Jules Vallès, 75011 Paris, France",
-      "geometry": { "location": { "lat": 48.8527401, "lng": 2.3849339 } },
+      "geometry": {
+        "location": {
+          "lat": 48.8527401,
+          "lng": 2.3849339
+        }
+      },
       "name": "Le Chardenoux",
       "photos": [
         {
@@ -12,7 +17,12 @@
           "width": 3984
         }
       ],
-      "types": [ "restaurant", "food", "point_of_interest", "establishment" ]
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ]
     }
   }
 }
