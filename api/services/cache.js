@@ -26,18 +26,16 @@ client.on("ready", function () {
     Logger.info(`CACHE\tRedis up and running`)
 });
 
-key = (placeId) => {
-    return `gm__place__${placeId}`;
-};
+const getKey = placeId => `gm__place__${placeId}`;
 
 module.exports = {
     getPlace: (placeId) => {
-        return getAsync(key(placeId)).then((data) => {
+        return getAsync(getKey(placeId)).then((data) => {
             return JSON.parse(data);
         });
     },
     setPlace: (placeId, value) => {
-        return setAsync(key(placeId), JSON.stringify(value));
+        return setAsync(getKey(placeId), JSON.stringify(value));
     },
 };
 
