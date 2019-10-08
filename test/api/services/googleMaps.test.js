@@ -19,6 +19,7 @@ const CacheService = require('@api/services/cache');
 
 const LairResponse = require('@models/responses/lair.response');
 const googleMapDummyResponse = require('./../../resources/googleMapGetPlace.response');
+const googleMapPlacePhotoDummyResponse = require('./../../resources/googleMapGetPlacePhoto.response');
 
 describe('Google maps service', () => {
 
@@ -35,10 +36,16 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then(() => {
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.calledOnce).to.be.true;
                 expect(getPlaceStub.calledOnce).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
                 done();
             })
         });
@@ -50,11 +57,17 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then((result) => {
                 expect(result.test).to.be.true;
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.called).to.be.false;
                 expect(getPlaceStub.called).to.be.false;
+                expect(getPlacePhotoStub.called).to.be.false;
                 done();
             })
         });
@@ -66,12 +79,18 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1', {forceRefresh: true}).then((result) => {
                 expect(result.test).to.be.undefined;
                 expect(result.name).to.be.equal('Le Chardenoux');
                 expect(getCacheStub.calledOnce).to.be.false;
                 expect(setCacheStub.called).to.be.true;
                 expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
                 done();
             })
         });
@@ -83,6 +102,11 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then((result) => {
                 expect(result.formatted_address).to.undefined;
                 expect(result.address).to.be.equal('1 Rue Jules Vallès, 75011 Paris, France');
@@ -90,6 +114,7 @@ describe('Google maps service', () => {
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.called).to.be.true;
                 expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
                 done();
             })
         });
@@ -101,6 +126,11 @@ describe('Google maps service', () => {
                     reject(new Error('My error'));
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then((result) => {
                 expect(false).to.be.true;
                 done();
@@ -109,6 +139,7 @@ describe('Google maps service', () => {
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.called).to.be.false;
                 expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.called).to.be.false;
                 done();
             })
         });
@@ -120,11 +151,17 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then((result) => {
                 expect(result.name).to.be.equal('Le Chardenoux');
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.called).to.be.true;
                 expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
                 done();
             })
         });
@@ -136,11 +173,39 @@ describe('Google maps service', () => {
                     resolve(googleMapDummyResponse)
                 })
             });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapPlacePhotoDummyResponse)
+                })
+            });
             GoogleMapsService.getPlaceDetails('1').then((result) => {
                 expect(result.name).to.be.equal('Le Chardenoux');
                 expect(getCacheStub.calledOnce).to.be.true;
                 expect(setCacheStub.called).to.be.true;
                 expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
+                done();
+            })
+        });
+        it('should not failed when get picture fails', (done) => {
+            const getCacheStub = sinon.stub(CacheService, 'getPlace').resolves(null);
+            const setCacheStub = sinon.stub(CacheService, 'setPlace').rejects(new Error('Failed'));
+            const getPlaceStub = sinon.stub(dummyClient, 'place').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    resolve(googleMapDummyResponse)
+                })
+            });
+            const getPlacePhotoStub = sinon.stub(dummyClient, 'placesPhoto').returns({
+                asPromise: () => new Promise((resolve, reject) => {
+                    reject(new Error('FAILED'))
+                })
+            });
+            GoogleMapsService.getPlaceDetails('1').then((result) => {
+                expect(result.name).to.be.equal('Le Chardenoux');
+                expect(getCacheStub.calledOnce).to.be.true;
+                expect(setCacheStub.called).to.be.true;
+                expect(getPlaceStub.called).to.be.true;
+                expect(getPlacePhotoStub.calledTwice).to.be.true;
                 done();
             })
         });
