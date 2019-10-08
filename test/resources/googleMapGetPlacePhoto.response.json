@@ -1,0 +1,8 @@
+{
+  "req": {
+    "socket": {
+      "host": "url"
+    },
+    "path": "path"
+  }
+}

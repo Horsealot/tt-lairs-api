@@ -48,7 +48,7 @@ const self = {
                 const formattedLair = await GoogleMapsClient.getPlaceDetails(existingUser.lairs[i]);
                 validUserLairs.push(formattedLair);
             } catch (e) {
-                Logger.error(`index.ctrl.js\tLair {${lairIds[i]}} could not be retrieved for user {${userId}}, reason {${e.message}}`);
+                Logger.error(`index.ctrl.js\tLair {${existingUser.lairs[i]}} could not be retrieved for user {${userId}}, reason {${e.message}}`);
             }
         }
         res.send(validUserLairs);

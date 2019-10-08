@@ -12,6 +12,10 @@ const googleMapsClient = require('@google/maps').createClient({
 
 const CacheService = require('./cache');
 
+const getPhotoUrl = (response) => {
+    return "https://" + response.req.socket._host + response.req.path;
+};
+
 const self = {
     /**
      * Get place details from cache or GoogleMaps API if we have no corresponding data in cache
@@ -47,10 +51,23 @@ const self = {
                 ]
             }).asPromise();
         } catch (err) {
-            Logger.error(`googleMaps.js\tError while getting place details {${err.message}}`);
+            Logger.error(`googleMaps.js\tError while getting place {${placeid}} details {${err.message}}`);
             throw err;
         }
         const mappedPlace = new LairResponse(response.json.result);
+        let placePhotos = [];
+        await Promise.all(mappedPlace.photos.map((photo) => {
+            return new Promise((resolve) => {
+                self.getPlacePhoto().then((gmapPhoto) => {
+                    photo.url = getPhotoUrl(gmapPhoto);
+                    placePhotos.push(photo);
+                    resolve();
+                }).catch((err) => {
+                    Logger.error(`googleMaps.js\tError while getting place {${placeid}} photo {${photo.photo_reference}} {${err.message}}`);
+                    resolve();
+                });
+            })
+        }));
         try {
             await CacheService.setPlace(placeid, mappedPlace);
             Logger.debug(`googleMaps.js\t{${placeid}} cached`);
@@ -58,6 +75,13 @@ const self = {
             Logger.error(`googleMaps.js\tError while caching place {${placeid}}details {${err.message}}`);
         }
         return mappedPlace;
+    },
+    getPlacePhoto: (photoreference) => {
+        return googleMapsClient.placesPhoto({
+            photoreference,
+            maxheight: 800,
+            maxwidth: 800,
+        }).asPromise();
     },
 };
 
