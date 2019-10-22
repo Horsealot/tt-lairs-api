@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "458b46a1-921f-4e8f-8070-321cb0ddde5e",
+		"name": "TrikTrak Lairs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3002/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t\"ChIJL9eeygty5kcRBJgRHblbXkw\"\n]"
+				},
+				"url": {
+					"raw": "localhost:3002/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Auth success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uid\": \"sJMBCSv6HvWeyH9DrPD6LGMFicJ3\",\n\t\"accessToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6ImVlMjc0MWQ0MWY5ZDQzZmFiMWU2MjhhODVlZmI0MmE4OGVmMzIyOWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdHJpa3RyYWstMTUwZTciLCJhdWQiOiJ0cmlrdHJhay0xNTBlNyIsImF1dGhfdGltZSI6MTU2ODg4MDM3NywidXNlcl9pZCI6InNKTUJDU3Y2SHZXZXlIOURyUEQ2TEdNRmljSjMiLCJzdWIiOiJzSk1CQ1N2Nkh2V2V5SDlEclBENkxHTUZpY0ozIiwiaWF0IjoxNTY4ODgwMzc3LCJleHAiOjE1Njg4ODM5NzcsInBob25lX251bWJlciI6IiszMzYyOTQ5Nzc4MiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsicGhvbmUiOlsiKzMzNjI5NDk3NzgyIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGhvbmUifX0.BVtF264p7jchjj9UYfY8YfHkH1HY_SZeG_0DIOg2mqVA44nQo2PYF-mhk0TOA4SVPRWKM8QyLRCHFWTctjOPT2V4zcPjkDEI9jhIKve_qNBcvwk29HFuZGbk57i9UuSvROAELWjeaAJj2cv4evyEpMkCCnhYpom8fBmwrsuDJvHjAe1dZ6-kW3ChRFdNcS2QF1vWkWBGBdmyCkAO8Ym0h1p8g8BaCN9W0MUk75m2ynH99X4m635J4ITBqgfj7W-2fIFd5KrlzSqqIKHUexwXWOman-Z6D-GquP4_CPRnuJYbfTx5xLnbeXELJmCBWr_Ms4zdqCDHR93Cb5xK3D8WMg\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/firebase",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"firebase"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 19 Sep 2019 08:57:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "OK"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODM0MzEwMjBlNTc2MzVjM2FlYjUyZSIsImV4cCI6MTU3NDQ5NTIyOCwiaWF0IjoxNTY5MzA3NjI4fQ.EXB19mp13VOBHXdOQ1HbC18pibkoS_KEd5iKZdQUEGM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "16fce88a-cc2e-4193-98b2-3c95c0bad127",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1720820b-8afa-4660-a130-65060097f083",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
